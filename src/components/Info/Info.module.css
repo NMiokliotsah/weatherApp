@@ -1,0 +1,25 @@
+.giveWeather{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.whetherInput{
+    padding: 20px;
+}   
+.whetherData{
+    width: 400px;
+    padding-left: 50px; 
+    margin-bottom: 100px; 
+    margin-top: 8px;
+}
+
+.inputСity{
+    height: 30px;
+    font-weight: bolder;
+}
+
+.checkBox{
+    padding-left: 4px;
+}
+
+input {outline:none;}

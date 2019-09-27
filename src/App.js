@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
-import Info from './components/Info';
+import InfoConteiner from './components/Info/InfoConteiner';
+// import WeatherContainer from './components/Weather/WeatherComponent';
 
-function App() {
+function App(props) {
   return (
-    <Info/>
+    <div>
+      <InfoConteiner />
+    </div>
   );
 }
 
