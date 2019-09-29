@@ -35,20 +35,15 @@ export const weatherDataOneSource = (nameCity) => {
                 dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp, responce.data.wind.speed,
                     responce.data.main.pressure, responce.data.main.humidity))
     });
-}
+} 
 }
 
-export const weatherDataTwoSource = () => {
+export const weatherDataTwoSource = (nameCity) => {
     return (dispatch) => {
-        weatherApi.getWeatherTwoSource()
-        // .then((response) => response.json()).then((jsonData) => {
-        //     console.log(jsonData);
-        //   });
+        weatherApi.getWeatherTwoSource(nameCity)
             .then(responce => {
-                // console.log(responce.data.meta.params[0]);
-                console.log(responce.hours);
-                // dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp,
-                //     responce.data.sys.sunrise, responce.data.sys.sunset))
+                dispatch(setWeather(responce.data.data[0].country_code, responce.data.data[0].city_name, responce.data.data[0].app_temp,
+                   responce.data.data[0].wind_spd, responce.data.data[0].pres, responce.data.data[0].rh));
             });
     }
 }

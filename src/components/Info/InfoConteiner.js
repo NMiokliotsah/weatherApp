@@ -14,7 +14,7 @@ class InfoContainer extends React.Component {
 }
 
 const mapToStateProps = state=>({
-  nameCity: state.form.weatherForm.values.cityName
+  // nameCity: state.form.weatherForm.cityName
 });
 export default connect(mapToStateProps, {weatherDataOneSource, weatherDataTwoSource})(InfoContainer);
 

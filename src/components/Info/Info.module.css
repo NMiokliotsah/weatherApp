@@ -3,6 +3,11 @@
     flex-wrap: wrap;
 }
 
+.btn{
+    height: 36px;
+    margin-right: 5px; 
+}
+
 .whetherInput{
     padding: 20px;
 }   
@@ -19,6 +24,7 @@
 }
 
 .checkBox{
+    border-radius: 10px;
     padding-left: 4px;
 }
 
