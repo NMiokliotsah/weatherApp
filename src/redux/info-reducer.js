@@ -26,13 +26,15 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setWeather = (country, city, temp, spedWind, pressure, humidity) => ({ type: SET_WEATHER, data: { country, city, temp, spedWind, pressure, humidity } });
+export const setWeather = (country, city, temp, spedWind, pressure, humidity) => 
+({ type: SET_WEATHER, data: { country, city, temp, spedWind, pressure, humidity } });
 
 export const weatherDataOneSource = (nameCity) => {
     return (dispatch) => {
         weatherApi.getWeatherOneSource(nameCity)
             .then(responce => {
-                dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp, responce.data.wind.speed,
+                dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp, 
+                    responce.data.wind.speed,
                     responce.data.main.pressure, responce.data.main.humidity))
     });
 } 

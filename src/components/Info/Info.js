@@ -2,14 +2,18 @@ import React from 'react';
 import style from './Info.module.css';
 import { Field, reduxForm } from 'redux-form';
 import WeatherComponent from '../Weather/WeatherComponent';
+import { required } from '../../utils/validator/validator';
+import { input } from '../common/FormControls/FormControls';
 
 const Info = (props) => {
 
     const onSubmit = (data) => {
         if (data.source === "oneSource")
             props.weatherDataOneSource(data.nameCity);
-        else
+        else if( data.source === "twoSource")
+        {
             props.weatherDataTwoSource(data.nameCity);
+        }
     }
 
     return (
@@ -34,7 +38,7 @@ const WeatherForm = (props) => {
                 <button className={style.btn} >
                     Serch
                 </button>
-                <Field component={"input"} name="nameCity" className={style.inputСity} />
+                <Field component={input} name="nameCity" className={style.inputСity} validate={[required]}/>
                 <div className={style.checkBox}>
                     <label><Field name="source" component="input" type="radio" value="oneSource" /> oneSource</label>
                     <br />
