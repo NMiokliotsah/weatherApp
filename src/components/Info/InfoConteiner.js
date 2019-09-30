@@ -1,13 +1,13 @@
 import React from 'react';
 import Info from './Info';
 import { connect } from 'react-redux';
-
-import { weatherDataOneSource, weatherDataTwoSource } from "../../redux/info-reducer";
+import { weatherDataOneSource, weatherDataTwoSource, getUserLocation } from "../../redux/info-reducer";
 
 
 class InfoContainer extends React.Component {
     render() {
         return <Info
+        getUserLocation = {this.props.getUserLocation} 
         weatherDataOneSource={this.props.weatherDataOneSource} 
         weatherDataTwoSource={this.props.weatherDataTwoSource}/>
     }
@@ -16,6 +16,6 @@ class InfoContainer extends React.Component {
 const mapToStateProps = state=>({
   // nameCity: state.form.weatherForm.cityName
 });
-export default connect(mapToStateProps, {weatherDataOneSource, weatherDataTwoSource})(InfoContainer);
+export default connect(mapToStateProps, {weatherDataOneSource, weatherDataTwoSource, getUserLocation})(InfoContainer);
 
 

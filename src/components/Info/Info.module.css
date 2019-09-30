@@ -1,3 +1,7 @@
+.textInput input[type="text"]{
+    padding-left: 5px; 
+}
+
 .giveWeather{
     display: flex;
     flex-wrap: wrap;

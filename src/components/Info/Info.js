@@ -7,6 +7,7 @@ import { input } from '../common/FormControls/FormControls';
 
 const Info = (props) => {
 
+    props.getUserLocation();
     const onSubmit = (data) => {
         if (data.source === "oneSource")
             props.weatherDataOneSource(data.nameCity);
@@ -33,7 +34,7 @@ const Info = (props) => {
 const WeatherForm = (props) => {
 
     return (
-        <div>
+        <div className={style.textInput}>
             <form onSubmit={props.handleSubmit}>
                 <button className={style.btn} >
                     Serch
