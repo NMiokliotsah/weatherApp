@@ -1,25 +1,31 @@
-.textInput input[type="text"]{
-    padding-left: 5px; 
-}
-
 .giveWeather{
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+button:active, button:focus {
+    outline: none;
 }
 
 .btn{
     height: 36px;
-    margin-right: 5px; 
+    margin-right: 5px;
+    border-radius: 5px; 
 }
 
 .whetherInput{
-    padding: 20px;
+    padding-top: 20px;
+    
 }   
+
+.whetherInput input{
+    border-radius: 5px;
+}
 .whetherData{
-    width: 400px;
-    padding-left: 50px; 
-    margin-bottom: 100px; 
-    margin-top: 8px;
+    width: 200px;
+    padding-left: 15px; 
 }
 
 .inputСity{
@@ -29,7 +35,6 @@
 
 .checkBox{
     border-radius: 10px;
-    padding-left: 4px;
 }
 
 input {outline:none;}

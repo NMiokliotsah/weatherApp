@@ -9,16 +9,18 @@ const Info = (props) => {
 
     props.getUserLocation();
     const onSubmit = (data) => {
+        const time = new Date().getTime();
         if (data.source === "oneSource")
-            props.weatherDataOneSource(data.nameCity);
+            props.weatherDataOneSource(data.nameCity, time);
         else if( data.source === "twoSource")
         {
-            props.weatherDataTwoSource(data.nameCity);
+            props.weatherDataTwoSource(data.nameCity, time);
         }
     }
 
     return (
         <div className={style.giveWeather}>
+            
             <div className={style.whetherInput}>
                 <WeatherReduxForm onSubmit={onSubmit} />
             </div>
