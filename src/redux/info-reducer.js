@@ -86,7 +86,6 @@ export const weatherDataTwoSource = (nameCity, time) => {
 
 export const getUserLocation = () => {
     return (dispatch) => {
-        dispatch(setFetching(true));
         getLocation().then(responce => {
             weatherApi.getWeatherOneSource(responce.data.city)
                 .then(responce => {
@@ -94,7 +93,7 @@ export const getUserLocation = () => {
                     dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp,
                         responce.data.wind.speed, responce.data.main.pressure, responce.data.main.humidity));
                     dispatch(setTime(time));
-                    dispatch(setFetching(false));
+
                 });
         });
     }
