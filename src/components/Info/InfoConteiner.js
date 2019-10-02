@@ -7,6 +7,7 @@ import { weatherDataOneSource, weatherDataTwoSource, getUserLocation } from "../
 class InfoContainer extends React.Component {
     render() {
         return <Info
+        isFetching={this.props.isFetching}
         getUserLocation = {this.props.getUserLocation} 
         weatherDataOneSource={this.props.weatherDataOneSource} 
         weatherDataTwoSource={this.props.weatherDataTwoSource}/>
@@ -14,7 +15,7 @@ class InfoContainer extends React.Component {
 }
 
 const mapToStateProps = state=>({
-  // nameCity: state.form.weatherForm.cityName
+  isFetching: state.infoPage.isFetching
 });
 export default connect(mapToStateProps, {weatherDataOneSource, weatherDataTwoSource, getUserLocation})(InfoContainer);
 

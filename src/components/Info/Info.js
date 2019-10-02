@@ -9,6 +9,7 @@ const Info = (props) => {
 
     props.getUserLocation();
     const onSubmit = (data) => {
+        console.log(props.isFetching);
         const time = new Date().getTime();
         if (data.source === "oneSource")
             props.weatherDataOneSource(data.nameCity, time);
@@ -22,7 +23,7 @@ const Info = (props) => {
         <div className={style.giveWeather}>
             
             <div className={style.whetherInput}>
-                <WeatherReduxForm onSubmit={onSubmit} />
+                <WeatherReduxForm onSubmit={onSubmit} isFetching={props.isFetching}/>
             </div>
             <div className={style.whetherData}>
                 <WeatherComponent />
@@ -38,7 +39,7 @@ const WeatherForm = (props) => {
     return (
         <div className={style.textInput}>
             <form onSubmit={props.handleSubmit}>
-                <button className={style.btn} >
+                <button className={style.btn} disabled={ props.isFetching === true} >
                     Serch
                 </button>
                 <Field component={input} name="nameCity" className={style.inputСity} validate={[required]}/>
