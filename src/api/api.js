@@ -2,7 +2,7 @@ import *as axios from 'axios';
 
 export const weatherApi = {
     getWeatherOneSource(nameCity){
-        return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${nameCity}&appid=2c73aea93be4b2c4c3d654b6046363ad&units=metric`)
+        return axios.get(`http://api.openweathermap.org/data/2.5/weather?q=${nameCity}&appid=c81c42c72794bfc3205447b95acef58a&units=metric`)
         .then(responce =>{
             return responce;
         })

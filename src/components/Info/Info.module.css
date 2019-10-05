@@ -1,9 +1,10 @@
-.giveWeather{
+.wrapper{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    
 }
+
+input {outline:none;}
 
 button:active, button:focus {
     outline: none;
@@ -15,15 +16,14 @@ button:active, button:focus {
     border-radius: 5px; 
 }
 
-.whetherInput{
+.whetherForm{
     padding-top: 20px;
-    
 }   
 
-.whetherInput input{
+.whetherForm input{
     border-radius: 5px;
 }
-.whetherData{
+.whetherComponent{
     width: 200px;
     padding-left: 15px; 
 }
@@ -37,4 +37,3 @@ button:active, button:focus {
     border-radius: 10px;
 }
 
-input {outline:none;}

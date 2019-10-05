@@ -5,32 +5,39 @@ import WeatherComponent from '../Weather/WeatherComponent';
 import { required } from '../../utils/validator/validator';
 import { input } from '../common/FormControls/FormControls';
 
-const Info = (props) => {
+class Info extends React.Component {
 
-    props.getUserLocation();
-    const onSubmit = (data) => {
-        console.log(props.isFetching);
-        const time = new Date().getTime();
-        if (data.source === "oneSource")
-            props.weatherDataOneSource(data.nameCity, time);
-        else if( data.source === "twoSource")
-        {
-            props.weatherDataTwoSource(data.nameCity, time);
+    componentDidMount() {
+        if (!this.props.city)
+            this.props.getUserLocation();
+    }
+
+    onSubmit = (data) => {
+        const checkTime = this.props.time + 7200 <= new Date().getTime() && this.props.city === data.nameCity;
+        const checkSource = this.props.source === data.source;
+
+        if (data.source === "openweathermap") {
+            this.props.weatherDataOneSource(data.nameCity, data.source, checkTime, checkSource);
+        }
+        else if (data.source === "weatherbit") {
+            this.props.weatherDataTwoSource(data.nameCity, data.source, checkTime, checkSource);
         }
     }
 
-    return (
-        <div className={style.giveWeather}>
-            
-            <div className={style.whetherInput}>
-                <WeatherReduxForm onSubmit={onSubmit} isFetching={props.isFetching}/>
-            </div>
-            <div className={style.whetherData}>
-                <WeatherComponent />
-            </div>
+    render() {
+        return (
+            <div className={style.wrapper}>
 
-        </div>
-    );
+                <div className={style.whetherForm}>
+                    <WeatherReduxForm onSubmit={this.onSubmit} isFetching={this.props.isFetching} />
+                </div>
+                <div className={style.whetherComponent}>
+                    <WeatherComponent />
+                </div>
+
+            </div>
+        );
+    }
 }
 
 
@@ -39,14 +46,16 @@ const WeatherForm = (props) => {
     return (
         <div className={style.textInput}>
             <form onSubmit={props.handleSubmit}>
-                <button className={style.btn} disabled={ props.isFetching === true} >
+                <button className={style.btn} disabled={props.isFetching === true} >
                     Serch
                 </button>
-                <Field component={input} name="nameCity" className={style.inputСity} validate={[required]}/>
+                <Field component={input} name="nameCity" placeholder="name city" className={style.inputСity} validate={[required]} />
                 <div className={style.checkBox}>
-                    <label><Field name="source" component="input" type="radio" value="oneSource" /> oneSource</label>
+                    <label> Choose a source: </label>
+                    <br/>
+                    <label><Field name="source" component="input" type="radio" value="openweathermap" /> openweathermap</label>
                     <br />
-                    <label><Field name="source" component="input" type="radio" value="twoSource" /> twoSource</label>
+                    <label><Field name="source" component="input" type="radio" value="weatherbit" /> weatherbit</label>
                 </div>
             </form>
 

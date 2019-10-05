@@ -3,6 +3,7 @@ import { weatherApi, getLocation } from '../api/api';
 const SET_WEATHER  = "SET-WEATHER";
 const SET_FETCHING = "SET-FETCHING";
 const SET_TIME     = "SET-TIME";
+const GET_STATE    = "GET-STATE";
 
 const initialState = {
     country: undefined,
@@ -11,6 +12,7 @@ const initialState = {
     spedWind: undefined,
     pressure: undefined,
     humidity: undefined,
+    source: undefined,
     time: undefined,
     isFetching: false
 }
@@ -40,49 +42,52 @@ const authReducer = (state = initialState, action) => {
     }
 }
 
-export const setWeather = (country, city, temp, spedWind, pressure, humidity) =>
-    ({ type: SET_WEATHER, data: { country, city, temp, spedWind, pressure, humidity} });
+const setWeather = (country, city, temp, spedWind, pressure, humidity, source) =>
+    ({ type: SET_WEATHER, data: { country, city, temp, spedWind, pressure, humidity, source} });
 
-export const setTime = (time)=>({ type: SET_TIME, time});
+const setTime = (time)=>({ type: SET_TIME, time});
+const setFetching = (fetching)=>({type: SET_FETCHING, isFetching: fetching});
+const setOldState = ()=>({type: GET_STATE});
 
-export const setFetching = (fetching)=>({type: SET_FETCHING, isFetching: fetching});
-
-
-export const weatherDataOneSource = (nameCity, time) => {
-    // if (initialState.time + 7200 <= time && initialState.city === nameCity) {
+export const weatherDataOneSource = (nameCity, source, time, checkSource) => {
         return (dispatch) => {
-            dispatch(setFetching(true));
-            weatherApi.getWeatherOneSource(nameCity)
-                .then(responce => {
-                    const time = new Date().getTime() * 1000;
-                    dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp,
-                        responce.data.wind.speed, responce.data.main.pressure, responce.data.main.humidity));
-                    dispatch(setTime(time));
-                    dispatch(setFetching(false));
-                });
-            
-        // }
-    }
-
-}
-
-export const weatherDataTwoSource = (nameCity, time) => {
-    if (initialState.time + 7200 <= time && initialState.city === nameCity) {
-        return (dispatch) => {
-            dispatch(setFetching(true));
-            weatherApi.getWeatherTwoSource(nameCity)
-                .then(responce => {
-                    const time = new Date().getTime() * 1000;
-                    dispatch(setWeather(responce.data.data[0].country_code, responce.data.data[0].city_name,
-                        responce.data.data[0].app_temp, responce.data.data[0].wind_spd, responce.data.data[0].pres,
-                        responce.data.data[0].rh));
-                    dispatch(setTime(time));
-                    dispatch(setFetching(false));
-                });
+            if (!time && checkSource) {
+                dispatch(setOldState(setOldState));
+            }
+            else{
+                dispatch(setFetching(true));
+                weatherApi.getWeatherOneSource(nameCity)
+                    .then(responce => {
+                        const time = new Date().getTime() * 1000;
+                        dispatch(setTime(time));
+                        dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp,
+                            responce.data.wind.speed, responce.data.main.pressure, responce.data.main.humidity, source));    
+                        dispatch(setFetching(false));            
+                    });
+            }
         }
-    }
 }
 
+export const weatherDataTwoSource = (nameCity, source, time, checkSource) => {
+    
+        return (dispatch) => {
+            if (!time && checkSource) {
+                dispatch(setOldState(setOldState));
+            }
+            else {
+                dispatch(setFetching(true));
+                weatherApi.getWeatherTwoSource(nameCity)
+                    .then(responce => {
+                        const time = new Date().getTime() * 1000;
+                        dispatch(setWeather(responce.data.data[0].country_code, responce.data.data[0].city_name,
+                            responce.data.data[0].app_temp, responce.data.data[0].wind_spd, responce.data.data[0].pres,
+                            responce.data.data[0].rh, source)); 
+                        dispatch(setTime(time)); 
+                        dispatch(setFetching(false));
+                    });
+            } 
+        } 
+}
 
 export const getUserLocation = () => {
     return (dispatch) => {
@@ -93,12 +98,9 @@ export const getUserLocation = () => {
                     dispatch(setWeather(responce.data.sys.country, responce.data.name, responce.data.main.temp,
                         responce.data.wind.speed, responce.data.main.pressure, responce.data.main.humidity));
                     dispatch(setTime(time));
-
                 });
         });
     }
 }
-
-
 
 export default authReducer;
