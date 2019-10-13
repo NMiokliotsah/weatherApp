@@ -5,7 +5,7 @@ import InfoConteiner from './components/Info/InfoConteiner';
 
 function App(props) {
   return (
-    <div>
+    <div className="wrapper">
       <InfoConteiner />
     </div>
   );

@@ -1,0 +1,7 @@
+@import url('https://fonts.googleapis.com/css?family=Lora&display=swap');
+
+.weatherInfo p{
+    color: white;
+    font-family: 'Lora', serif;
+    font-size: 20px;
+}

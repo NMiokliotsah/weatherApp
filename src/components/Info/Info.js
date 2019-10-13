@@ -15,11 +15,13 @@ class Info extends React.Component {
     onSubmit = (data) => {
         const checkTime = this.props.time + 7200 <= new Date().getTime() && this.props.city === data.nameCity;
         const checkSource = this.props.source === data.source;
-
+        debugger;
         if (data.source === "openweathermap") {
+            debugger;
             this.props.weatherDataOneSource(data.nameCity, data.source, checkTime, checkSource);
         }
         else if (data.source === "weatherbit") {
+            
             this.props.weatherDataTwoSource(data.nameCity, data.source, checkTime, checkSource);
         }
     }
@@ -47,7 +49,7 @@ const WeatherForm = (props) => {
         <div className={style.textInput}>
             <form onSubmit={props.handleSubmit}>
                 <button className={style.btn} disabled={props.isFetching === true} >
-                    Serch
+                    Search
                 </button>
                 <Field component={input} name="nameCity" placeholder="name city" className={style.inputСity} validate={[required]} />
                 <div className={style.checkBox}>

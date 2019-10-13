@@ -9,7 +9,7 @@ export const weatherApi = {
     },
 
     getWeatherTwoSource(nameCity){
-        return axios.get(`https://api.weatherbit.io/v2.0/current?city=${nameCity},be&key=f9e70663bfd64fa58d1507eb10c22256`, {
+        return axios.get(`https://api.weatherbit.io/v2.0/current?city=${nameCity}&key=f9e70663bfd64fa58d1507eb10c22256`, {
             headers: {
               'Authorization': '16296166-d006-11e9-81a5-0242ac130004-16296288-d006-11e9-81a5-0242ac130004'
             }})
