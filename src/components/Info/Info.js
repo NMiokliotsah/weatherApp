@@ -15,14 +15,9 @@ class Info extends React.Component {
     onSubmit = (data) => {
         const checkTime = this.props.time + 7200 <= new Date().getTime() && this.props.city === data.nameCity;
         const checkSource = this.props.source === data.source;
-        debugger;
+       
         if (data.source === "openweathermap") {
-            debugger;
             this.props.weatherDataOneSource(data.nameCity, data.source, checkTime, checkSource);
-        }
-        else if (data.source === "weatherbit") {
-            
-            this.props.weatherDataTwoSource(data.nameCity, data.source, checkTime, checkSource);
         }
     }
 
@@ -46,21 +41,13 @@ class Info extends React.Component {
 const WeatherForm = (props) => {
 
     return (
-        <div className={style.textInput}>
+        <div className={style.boxSubmitCity}>
             <form onSubmit={props.handleSubmit}>
                 <button className={style.btn} disabled={props.isFetching === true} >
                     Search
                 </button>
                 <Field component={input} name="nameCity" placeholder="name city" className={style.inputСity} validate={[required]} />
-                <div className={style.checkBox}>
-                    <label> Choose a source: </label>
-                    <br/>
-                    <label><Field name="source" component="input" type="radio" value="openweathermap" /> openweathermap</label>
-                    <br />
-                    <label><Field name="source" component="input" type="radio" value="weatherbit" /> weatherbit</label>
-                </div>
             </form>
-
         </div>
     );
 }

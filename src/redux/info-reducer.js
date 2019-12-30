@@ -69,27 +69,6 @@ export const weatherDataOneSource = (nameCity, source, time, checkSource) => {
         }
 }
 
-export const weatherDataTwoSource = (nameCity, source, time, checkSource) => {
-    
-        return (dispatch) => {
-            if (time && checkSource) {
-                dispatch(setOldState(setOldState));
-            }
-            else {
-            
-                dispatch(setFetching(true));
-                weatherApi.getWeatherTwoSource(nameCity)
-                    .then(responce => {
-                        const time = new Date().getTime() * 1000;
-                        dispatch(setTime(time)); 
-                        dispatch(setWeather(responce.data.data[0].country_code, responce.data.data[0].city_name,
-                            responce.data.data[0].app_temp, responce.data.data[0].wind_spd, responce.data.data[0].pres,
-                            responce.data.data[0].rh, source)); 
-                        dispatch(setFetching(false));
-                    });
-            } 
-        } 
-}
 
 export const getUserLocation = () => {
     return (dispatch) => {
