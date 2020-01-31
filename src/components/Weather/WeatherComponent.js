@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 class WeatherContainer extends React.Component {
     render() {
         return <Weather
-        infoWeather={this.props.infoWeather}/>
+            infoWeather={this.props.infoWeather} />
     }
 }
 

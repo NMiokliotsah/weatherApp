@@ -14,11 +14,7 @@ class Info extends React.Component {
 
     onSubmit = (data) => {
         const checkTime = this.props.time + 7200 <= new Date().getTime() && this.props.city === data.nameCity;
-        const checkSource = this.props.source === data.source;
-       
-        if (data.source === "openweathermap") {
-            this.props.weatherDataOneSource(data.nameCity, data.source, checkTime, checkSource);
-        }
+        this.props.weatherDataOneSource(data.nameCity, checkTime);
     }
 
     render() {
@@ -37,22 +33,19 @@ class Info extends React.Component {
     }
 }
 
-
 const WeatherForm = (props) => {
-
     return (
         <div className={style.boxSubmitCity}>
             <form onSubmit={props.handleSubmit}>
-                <button className={style.btn} disabled={props.isFetching === true} >
+                <button className={style.btn} disabled={props.isFetching === true}>
                     Search
                 </button>
-                <Field component={input} name="nameCity" placeholder="name city" className={style.inputСity} validate={[required]} />
+                <Field component={input} name="nameCity" placeholder="name city" className={style.inputCity} validate={[required]} />
             </form>
         </div>
     );
 }
 
 const WeatherReduxForm = reduxForm({ form: "weatherForm" })(WeatherForm);
-
 
 export default Info;

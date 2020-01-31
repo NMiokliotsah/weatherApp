@@ -1,7 +1,7 @@
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import infoReducer from '../redux/info-reducer';
-import {reducer as formReducer} from "redux-form"; 
+import { reducer as formReducer } from "redux-form";
 
 let reducers = combineReducers({
     infoPage: infoReducer,
@@ -9,7 +9,5 @@ let reducers = combineReducers({
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));
-
-window.store = store;
 
 export default store;

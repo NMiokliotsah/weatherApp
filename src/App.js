@@ -1,12 +1,12 @@
 import React from 'react';
 import './App.css';
-import InfoConteiner from './components/Info/InfoConteiner';
+import InfoContainer from './components/Info/InfoContainer';
 // import WeatherContainer from './components/Weather/WeatherComponent';
 
 function App(props) {
   return (
     <div className="wrapper">
-      <InfoConteiner />
+      <InfoContainer />
     </div>
   );
 }

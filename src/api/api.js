@@ -9,7 +9,6 @@ export const weatherApi = {
     }
 }
 
-
 export const getLocation = ()=>{
     return axios.get("https://ipinfo.io/?token=5d59e8cf925c0f")
     .then( response =>{

@@ -11,7 +11,7 @@ class InfoContainer extends React.Component {
         isFetching={this.props.isFetching}
         city={this.props.city}
         time={this.props.time}
-        getUserLocation={this.props.getUserLocation} 
+        getUserLocation={this.props.getUserLocation}
         weatherDataOneSource={this.props.weatherDataOneSource}/>
     }
 }
